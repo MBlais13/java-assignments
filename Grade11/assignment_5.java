@@ -36,7 +36,7 @@ public class assignment_5 {
 		System.out.println("|Large Drink       |$2.99     |");
 		System.out.println("|Small Drink       |$1.99     |");
 		System.out.println("|Milkshake         |$4.99     |");
-		System.out.println("|-----------------------------|");// is the menu^^^
+		System.out.println("|-----------------------------|");
 
 		Scanner input = new Scanner(System.in);// starts input process
 		System.out.println("How many Burgers do you want?");// Asks customer how many items of food they want vvv

@@ -1,8 +1,12 @@
+// Grade 11, Computer Science, Assignment 7
+
+// review needed!
+package programming_assignment_7;
+
 import java.util.Scanner;
 import java.text.NumberFormat;
 
-class assignment-7
-{
+class assignment_7 {
 
 	public static void main(String[] args) {
 

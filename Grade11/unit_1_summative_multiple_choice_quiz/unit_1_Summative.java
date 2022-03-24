@@ -1,7 +1,12 @@
+// Grade 11, Computer Science, Assignment Unit 1
+
+// review needed!
+package unit_1_summative_multiple_choice_quiz;
+
 import java.util.Scanner;
 import java.text.NumberFormat;
 
-public class unit_1 {
+class unit_1_Summative {
     public static void main(String[] args) {
 
         String guess1;
@@ -124,13 +129,12 @@ public class unit_1 {
                                                                  // five
         rightanswerDivided = rightanswer / 5;// does math to get you percent avererage
 
-        System.out.println("On this quiz you got " + rightanswer + " out of 5.0 right on this quiz");// tells you how
-                                                                                                     // many you got
-                                                                                                     // right
-        System.out.println("On this quiz you got " + wronganswer + " out of 5.0 wrong on this quiz");// tells you how
-                                                                                                     // many you got
-                                                                                                     // wrong
-        System.out.println("This is your score on the quiz:");// tells you your percent average
-        System.out.println(percent.format(rightanswerDivided));
+        System.out.println("On this quiz you got " + rightanswer + " out of 5.0 right on this quiz");
+        System.out.println("On this quiz you got " + wronganswer + " out of 5.0 wrong on this quiz");
+        //System.out.println("This is your score on the quiz:");  // tells you your percent average
+        //System.out.printf("This is your score on the quiz:\n",percent.format(rightanswerDivided));
+        System.out.printf(percent.format(rightanswerDivided));
     }
 }
+
+// Made by MBlais with ♥

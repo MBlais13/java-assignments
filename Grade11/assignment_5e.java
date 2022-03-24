@@ -1,11 +1,24 @@
+// Grade 11, Computer Science, Assignment 5e
+
+// review needed!
 import java.util.Scanner;
 
-public class as_5 {
+public class assignment_5e {
+
+    // other vars
     public double subTotal;
     public static double runningTotal;
     private static double itemPrice;
     static boolean ordering = true;
     static Scanner input = new Scanner(System.in);
+    // menu vars
+    // This sucks
+    String item1 = "Burger";
+    String item2 = "Fries";
+    String item3 = "Drink";
+    double item_price1 = 6.25;
+    double item_price2 = 3.50;
+    double item_price3 = 1.50;
 
     public static void menu() {
         System.out.println("Welcome \n1. Burger ($2.00) \n2. Fries ($1.50)\n3. Soda ($1.00) \n4. Done");
@@ -51,7 +64,9 @@ public class as_5 {
         System.out.println("Enjoy your meal");
     }
 
+    // the thing that makes everything work.
     public static void main(String[] args) {
+        System.out.println("Welcome to Blais Burgers!");
         int menuOption;
         int foodItem = 0;
         input = new Scanner(System.in);
@@ -84,3 +99,5 @@ public class as_5 {
         }
     }
 }
+
+// Made by MBlais with ♥
