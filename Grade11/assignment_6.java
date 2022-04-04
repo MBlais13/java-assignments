@@ -4,58 +4,58 @@ import java.util.Scanner;
 import java.text.NumberFormat;
 
 public class assignment_6 {
+	// global vars
+	public static double newPrice;
+	public static double discountAmount;
+	public static NumberFormat money = NumberFormat.getCurrencyInstance();
+
 	public static void main(String[] args) {
 		double amountSpent;
-		int fortyPercent = 120;
-		double thirtyPercent = 80.01;
-		double twentyPercent = 40.01;
-		double tenPercent = 0.01;
-		double discountAmount;
-		double newCost;// gives the variables the names and amounts ^^^
+		// discount amount thresholds
+		double FortyPercentThreshold = 120;
+		double ThirtyPercentThreshold = 80.01;
+		double TwentyPercentThreshold = 40.01;
+		double TenPercentThreshold = 0.01;
 
-		Scanner input = new Scanner(System.in);// starts input process
-		System.out.println("How much money have you spent?:");
-		amountSpent = input.nextDouble();// collects the information
-		input.close();// ends input process
-		NumberFormat money = NumberFormat.getCurrencyInstance();// starts the formatting
+		// information processor
+		Scanner input = new Scanner(System.in);
+		System.out.println("How much money have you spent?: ");
+		// might be a good idea to add a money format here.
+		amountSpent = input.nextDouble();
+		input.close();
 
-		if (amountSpent >= fortyPercent) {
-			discountAmount = amountSpent * 0.4;// gets the discountAmount
-			newCost = amountSpent - discountAmount;// subtracts the discount from the original cost
-			System.out.println("You have a forty percent discount.");
-
-			System.out.println(money.format(discountAmount));// tells you the discountAmount
-			System.out.println("Your newCost is");
-			System.out.println(money.format(newCost)); // tells you the new price
-
-		} else if (amountSpent >= thirtyPercent) {
-			discountAmount = amountSpent * 0.3;// gets the discountAmount
-			newCost = amountSpent - discountAmount;// subtracts the discount from the original cost
-			System.out.println("You have a thirty percent discount.");
-
-			System.out.println(money.format(discountAmount));// tells you the discountAmount
-			System.out.println("Your newCost is");
-			System.out.println(money.format(newCost)); // tells you the new price
-
-		} else if (amountSpent >= twentyPercent) {
-			discountAmount = amountSpent * 0.2;// gets the discountAmount
-			newCost = amountSpent - discountAmount;// subtracts the discount from the original cost
-			System.out.println("You have a twenty percent discount.");
-
-			System.out.println(money.format(discountAmount));// tells you the discountAmount
-			System.out.println("Your newCost is");
-			System.out.println(money.format(newCost)); // tells you the new price
-
-		} else if (amountSpent >= tenPercent) {
-			discountAmount = amountSpent * 0.1;// gets the discountAmount
-			newCost = amountSpent - discountAmount;// subtracts the discount from the original cost
-			System.out.println("You have a ten percent discount.");
-
-			System.out.println(money.format(discountAmount));// tells you the discountAmount
-			System.out.println("Your newCost is");
-			System.out.println(money.format(newCost)); // tells you the new price
+		// absolutely terrible code. inefficient
+		// 40%
+		if (amountSpent >= FortyPercentThreshold) {
+			discountAmount = amountSpent * 0.4;
+			newPrice = amountSpent - discountAmount;
+			System.out.println("You have a 40% discount!");
+			NewPriceFunction();
+			// 30%
+		} else if (amountSpent >= ThirtyPercentThreshold) {
+			discountAmount = amountSpent * 0.3;
+			newPrice = amountSpent - discountAmount;
+			System.out.println("You have a 30% discount!");
+			NewPriceFunction();
+			// 20%
+		} else if (amountSpent >= TwentyPercentThreshold) {
+			discountAmount = amountSpent * 0.2;
+			newPrice = amountSpent - discountAmount;
+			System.out.println("You have a 20% discount!");
+			NewPriceFunction();
+			// 10%
+		} else if (amountSpent >= TenPercentThreshold) {
+			discountAmount = amountSpent * 0.1;
+			newPrice = amountSpent - discountAmount;
+			System.out.println("You have a 10% discount!");
+			NewPriceFunction();
 		}
+	}
 
+	// Final - displays the discount amount as well as the new price.
+	static void NewPriceFunction() {
+		System.out.println("Discount amount: " + money.format(discountAmount));
+		System.out.println("Your new price is: " + money.format(newPrice));
 	}
 }
 

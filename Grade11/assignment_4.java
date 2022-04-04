@@ -1,6 +1,6 @@
 // Grade 11, Computer Science, Assignment 4
 
-import java.util.Scanner;//imports package
+import java.util.Scanner;
 
 public class assignment_4 {
 	public static void main(String[] args) {

@@ -1,6 +1,5 @@
 // Grade 11, Computer Science, Assignment 8e
 
-
 import java.util.Random;
 
 public class assignment_8e {
