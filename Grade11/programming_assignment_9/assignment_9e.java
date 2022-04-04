@@ -1,5 +1,6 @@
-package programming_assignment_9;
 // Grade 11, Computer Science, Assignment 9
+
+package programming_assignment_9;
 
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
