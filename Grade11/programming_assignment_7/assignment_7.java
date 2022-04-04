@@ -22,7 +22,7 @@ class assignment_7 {
 
 	public static void main(String[] args) {
 		System.out.println("Welcome to Putrid Pizza!");
-		System.out.println("~~ The one stop pizza place where we only serve: extra extra anchovies and extra extra olives. ~~");
+		System.out.println("~~ The one stop pizza place where we only serve; extra extra anchovies and extra extra olives. ~~");
 		System.out.println("--------------------------");
 
 		Selection(); // asks customer size and quantity.
@@ -43,18 +43,17 @@ class assignment_7 {
 	}
 
 	static void Price() {
-		System.out.println("Your 1 is: " + money.format(subTotal));
-		// subTotal = pizza_quantity * labourCost + pizza_quantity * rentCost +
-		// pizzaSize * diameterCost;
+		// subTotal = pizza_quantity * labourCost + pizza_quantity * rentCost + // not correct
+		// had to move the math to their own line since it caused problems.
 		subTotal = pizza_quantity * diameterCost;
 		subTotal = pizza_quantity * labourCost;
 		subTotal = pizza_quantity * rentCost;
-		System.out.println("Your 2 is: " + money.format(subTotal));
 		totalCost = subTotal * 0.13 + subTotal;
 		System.out.println("Your subTotal is: " + money.format(subTotal));
 		System.out.println("Your final price is: " + money.format(totalCost));
 	}
 
+	// asks customer size and quantity.
 	static void Selection() {
 		Scanner input = new Scanner(System.in);
 		// amount of pizza
