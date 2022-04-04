@@ -57,7 +57,19 @@ public class assignment_9e {
 		} else if (rollingAnswer == 2) {
 			System.out.println("------------------------------");
 			System.out.println("You decide to sit and watch as your blood begins to boil and your skin starts to drip due to the excessive heat.");
-			System.out.println("...");		
+			System.out.println("...");
+
+			// dot loading effect
+			Scanner scan = new Scanner(System.in);
+			String firstName = scan.next();
+			System.out.println("First Name is: "+firstName);
+			scan.close();
+			// int LA = 4;
+			// for (int i = 1; i <= LA; ++i) {
+			// 	TimeUnit.SECONDS.sleep(1);
+			// 	System.out.println("." + dot);
+			// }
+
 			System.out.println("You open your eyes and realize you`re alive in a hospital in the year 2055.. The doctor tells you they somehow managed to upload your brain to a database and you now live the rest of your life in a mechanical robot body.");
 			// end of story
 			System.out.println("-\n~~The End.~~");
