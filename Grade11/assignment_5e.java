@@ -13,8 +13,9 @@ public class assignment_5e {
     static boolean ordering = true;
     static Scanner input = new Scanner(System.in);
     public static NumberFormat money = NumberFormat.getCurrencyInstance();
+    
     // menu vars
-    // This sucks
+    // This sucks -- this isn't an efficient way of doing this..
     public static String item1 = "Cheese Burger";
     public static String item2 = "Double Stacked Burger";
     public static String item3 = "Drink";
@@ -51,6 +52,7 @@ public class assignment_5e {
         return quantity;
     }
 
+    // calculates the subtotal cost
     public static double subTotal(double quantity, double itemPrice) {
         double subTotal = quantity * itemPrice;
         System.out.println("--------------------------");
@@ -59,6 +61,7 @@ public class assignment_5e {
         return subTotal;
     }
 
+    // calculates the total cost
     public static void done() {
         ordering = false;
         totalCost = runningTotal * 0.13 + runningTotal;
