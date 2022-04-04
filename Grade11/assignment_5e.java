@@ -1,51 +1,51 @@
 // Grade 11, Computer Science, Assignment 5e
 
-// review needed!
 import java.util.Scanner;
+import java.text.NumberFormat;
 
 public class assignment_5e {
 
     // other vars
-    public double subTotal;
+    public static double subTotal;
+    public static double totalCost;
     public static double runningTotal;
     private static double itemPrice;
     static boolean ordering = true;
     static Scanner input = new Scanner(System.in);
+    public static NumberFormat money = NumberFormat.getCurrencyInstance();
     // menu vars
     // This sucks
-    String item1 = "Burger";
-    String item2 = "Fries";
-    String item3 = "Drink";
-    double item_price1 = 6.25;
-    double item_price2 = 3.50;
-    double item_price3 = 1.50;
+    public static String item1 = "Cheese Burger";
+    public static String item2 = "Double Stacked Burger";
+    public static String item3 = "Drink";
+    public static double item_price1 = 4.25;
+    public static double item_price2 = 6.50;
+    public static double item_price3 = 1.00;
 
     public static void menu() {
-        System.out.println("Welcome \n1. Burger ($2.00) \n2. Fries ($1.50)\n3. Soda ($1.00) \n4. Done");
+        System.out.println("--------------------------");
+        System.out.println("What would you like to purchase? \n1. Cheese Burger ($4.25) \n2. Double Stacked Burger ($6.50)\n3. Soda ($1.00) \n4. Done");
     }
 
     public static double itemPrice(int foodItem) {
         if (foodItem == 1) {
-            // burger= $2.00
-            System.out.println("You've ordered a burger");
-            itemPrice = 2.00;
+            System.out.println("You've ordered a " + item1);
+            itemPrice = item_price1;
         }
         if (foodItem == 2) {
-            // fries = $1.50
-            System.out.println("You've ordered fries");
-            itemPrice = 1.50;
+            System.out.println("You've ordered a " + item2);
+            itemPrice = item_price2;
         }
         if (foodItem == 3) {
-            // soda = $1.00
-            System.out.println("You've ordered a soda");
-            itemPrice = 1.00;
+            System.out.println("You've ordered a " + item3);
+            itemPrice = item_price3;
         }
         quantity();
         return itemPrice;
     }
 
     public static double quantity() {
-        System.out.println("Enter quantity");
+        System.out.println("Enter quantity: ");
         double quantity = input.nextDouble();
         subTotal(quantity, itemPrice);
         return quantity;
@@ -53,18 +53,23 @@ public class assignment_5e {
 
     public static double subTotal(double quantity, double itemPrice) {
         double subTotal = quantity * itemPrice;
-        System.out.println("Subtotal: " + subTotal);
+        System.out.println("--------------------------");
+        System.out.println("Subtotal: " + money.format(subTotal));
         runningTotal += subTotal;
         return subTotal;
     }
 
     public static void done() {
         ordering = false;
-        System.out.println(runningTotal);
-        System.out.println("Enjoy your meal");
+        totalCost = runningTotal * 0.13 + runningTotal;
+        System.out.println("--------------------------");
+        System.out.println("Your subtotal is: " + money.format(runningTotal));
+        System.out.println("Your total is: " + money.format(totalCost));
+        System.out.println("--------------------------");
+        System.out.println("Bye! Come again soon.");
     }
 
-    // the thing that makes everything work.
+    // makes everything work.
     public static void main(String[] args) {
         System.out.println("Welcome to Blais Burgers!");
         int menuOption;

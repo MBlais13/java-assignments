@@ -14,15 +14,16 @@ public class assignment_9 {
 		String answer5;
 		String answer6;
 
-		Scanner input = new Scanner(System.in);// starts input process
-		System.out.println("To continue story enter Y or N");
-		System.out.println("You are a plane crash survivor who somehow survived the crash");
-		System.out.println("You barely survive with only a broken leg, you see supplies do you crawl over to it");
+		Scanner input = new Scanner(System.in);
+		System.out.println("When prompted choose 1 or 2.");
+		System.out.println("--------------------------------");
+		System.out.println("You are trying to escape a fire.\nYou smell smoke, you start to look for an exit..");
 
 		answer1 = input.next();
 		if (answer1.equalsIgnoreCase("Y")) {
 			System.out.println("While crawling over to the supplies you bleed out");
 			System.out.println("You have died due to blood lose");
+			System.exit(0);
 
 		} else if (answer1.equalsIgnoreCase("N")) {
 			System.out.println("While you lay there bleeding out slowly you become sleepy and pass out");
@@ -82,6 +83,7 @@ public class assignment_9 {
 			System.out.println("You sit still and when they lift you up you don't fall off and die instantly");
 			System.out.println("Congrats, you have won the game!");
 		}
+		
 	}
 }
 
