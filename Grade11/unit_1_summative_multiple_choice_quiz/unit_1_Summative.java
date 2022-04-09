@@ -3,7 +3,6 @@
 package unit_1_summative_multiple_choice_quiz;
 
 import java.util.Scanner;
-//import java.text.NumberFormat;
 
 class unit_1_Summative {
     public static Scanner input = new Scanner(System.in);
