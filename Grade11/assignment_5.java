@@ -11,18 +11,18 @@ public class assignment_5 {
 		double friesCost = 5.99;
 		double largedrinkCost = 2.99;
 		double smalldrinkCost = 1.99;
-		double milkshakeCost = 4.99;// gives value to the food item and tells the computer the price^^^
-		int burgerAmount;// telling the program the variables for the foods listed vvv
+		double milkshakeCost = 4.99; // gives value to the food item and tells the computer the price^^^
+		int burgerAmount; // telling the program the variables for the foods listed vvv
 		int cheeseburgerAmount;
 		int chickenburgerAmount;
 		int friesAmount;
 		int largedrinkAmount;
 		int smalldrinkAmount;
-		int milkshakeAmount;// telling the program the variables for the foods listed ^^^
-		double subTotal;// telling the program the variables for the subtotal
-		double tax = 0.13;// telling the program what the value of tax is
-		double taxTotal;// telling the program the variables for the tax total
-		double grandTotal;// telling the program the variables for the grand total
+		int milkshakeAmount; // telling the program the variables for the foods listed ^^^
+		double subTotal; // telling the program the variables for the subtotal
+		double tax = 0.13; // telling the program what the value of tax is
+		double taxTotal; // telling the program the variables for the tax total
+		double grandTotal; // telling the program the variables for the grand total
 		NumberFormat money = NumberFormat.getCurrencyInstance();// starts the formatting program
 
 		System.out.println("Welcome to The Burger Shack here is the menu.");// Introduces the customer
