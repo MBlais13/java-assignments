@@ -13,7 +13,7 @@ public class assignment_5e {
     static boolean ordering = true;
     static Scanner input = new Scanner(System.in);
     public static NumberFormat money = NumberFormat.getCurrencyInstance();
-
+    
     // menu vars
     // This sucks -- this isn't an efficient way of doing this..
     public static String item1 = "Cheese Burger";
