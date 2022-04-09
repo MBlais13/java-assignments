@@ -10,7 +10,7 @@ class unit_1_Summative {
     public static int rollingAnswer = 0; // when the user selects an answer it will keep it temporarily
     public static int rollingWrong = 0; // keeps a total of the wrong answers
     public static int rollingRight = 0; // keeps a total of the right answers
-    public static boolean passedTest = false; // UNUSED - determines whether you passed the test or not (pass rate is set to 60%)
+    public static boolean passedTest = false; // UNUSED - determines whether you passed the test or not
     public static int passRate = 60; // the rate it will pass the user. testfinish() function uses this
 
     public static void main(String[] args) {
@@ -93,7 +93,7 @@ class unit_1_Summative {
         double totalpercent = rollingRight / totalQuestions * 100;
 
         if (totalpercent >= passRate) { // passed quiz (pass rate is set to 60%)
-            passedTest = true; 
+            passedTest = true;
             System.out.println("--------------------------\n- You Passed! -\n--------------------------");
             System.out.println(totalpercent + "%!");
             System.out.println("You got " + rollingRight + " questions correct!");
