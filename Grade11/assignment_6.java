@@ -24,7 +24,7 @@ public class assignment_6 {
 		amountSpent = input.nextDouble();
 		input.close();
 
-		// absolutely terrible code. inefficient
+		// bad code. inefficient
 		// 40%
 		if (amountSpent >= FortyPercentThreshold) {
 			discountAmount = amountSpent * 0.4;
