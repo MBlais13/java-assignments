@@ -1,3 +1,4 @@
+package assignments;
 // Grade 11, Computer Science, Assignment 8e
 
 import java.util.Random;

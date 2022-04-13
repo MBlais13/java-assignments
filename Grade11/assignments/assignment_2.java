@@ -1,3 +1,4 @@
+package assignments;
 // Grade 11, Computer Science, Assignment 2
 
 // Packages to import

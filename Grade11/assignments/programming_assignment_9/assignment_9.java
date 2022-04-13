@@ -2,7 +2,7 @@
 
 // review needed!
 
-package programming_assignment_9;
+package assignments.programming_assignment_9;
 
 import java.util.Scanner;
 

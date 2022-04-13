@@ -1,6 +1,6 @@
 // Grade 11, Computer Science, Assignment 9
 
-package programming_assignment_9;
+package assignments.programming_assignment_9;
 
 import java.util.Scanner;
 //import java.util.concurrent.TimeUnit; // unused - was used for a loading dot effect.
