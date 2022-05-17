@@ -1,6 +1,9 @@
+package review;
+// Grade 11, Computer Science, Creating For Loops
+
 import java.util.Scanner;
 
-public class creating_for_loops_Copy {
+public class creating_for_loops {
 	public static int delayms = 350; // used for slowing down the counting.
 
 	public static void main(String[] args) {
@@ -54,3 +57,4 @@ public class creating_for_loops_Copy {
 		}
 	}
 }
+// Made by MBlais with ♥

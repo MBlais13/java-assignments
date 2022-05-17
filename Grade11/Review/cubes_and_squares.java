@@ -1,4 +1,5 @@
-
+package review;
+// Grade 11, Computer Science, Cubes and squares
 import java.util.Scanner;
 import java.lang.Math;
 
@@ -80,3 +81,4 @@ public class cubes_and_squares {
 		}
 	}
 }
+// Made by MBlais with ♥
