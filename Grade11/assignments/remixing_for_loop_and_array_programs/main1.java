@@ -1,6 +1,6 @@
 // Grade 11, Computer Science, Assignment Remixing For Loop and Array Programs #1
 
-package review.remixing_for_loop_and_array_programs;
+package assignments.remixing_for_loop_and_array_programs;
 
 import java.util.Scanner;
 
@@ -21,6 +21,7 @@ public class main1 {
         // output
         System.out.println("-------------------------------------");
         System.out.println("The sum of those numbers are: " + total);
+        input.close();
     }
 }
 

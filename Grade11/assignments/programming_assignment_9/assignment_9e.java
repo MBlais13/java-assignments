@@ -73,6 +73,7 @@ public class assignment_9e {
 			System.out.println("You open your eyes and realize you`re alive in a hospital in the year 2055.. The doctor tells you they somehow managed to upload your brain to a database and you now live the rest of your life in a mechanical robot body.");
 			// end of story
 			System.out.println("-\n~~The End.~~");
+			input.close();
 		}
 	}
 }

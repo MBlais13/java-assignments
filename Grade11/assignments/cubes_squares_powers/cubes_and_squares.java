@@ -1,5 +1,6 @@
-package review;
 // Grade 11, Computer Science, Cubes and squares
+
+package assignments.cubes_squares_powers;
 import java.util.Scanner;
 import java.lang.Math;
 

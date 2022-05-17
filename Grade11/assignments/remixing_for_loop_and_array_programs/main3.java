@@ -1,5 +1,5 @@
 // Grade 11, Computer Science, Assignment Remixing For Loop and Array Programs #3
-package review.remixing_for_loop_and_array_programs;
+package assignments.remixing_for_loop_and_array_programs;
 
 public class main3 {
 

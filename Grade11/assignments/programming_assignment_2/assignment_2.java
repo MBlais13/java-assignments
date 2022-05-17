@@ -1,4 +1,4 @@
-package assignments;
+package assignments.programming_assignment_2;
 // Grade 11, Computer Science, Assignment 2
 
 // Packages to import

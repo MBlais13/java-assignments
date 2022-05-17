@@ -1,5 +1,5 @@
 // Grade 11, Computer Science, Counting Program
-package review;
+package assignments.counting_program;
 import java.util.Scanner;
 
 public class counting_program {

@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class assignment_12 {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
-		Scanner keyedInput = new Scanner(System.in);
 		int choice;
 
 		double Xvalue;
@@ -56,6 +55,7 @@ public class assignment_12 {
 				System.out.println("Exit");
 			}
 		}
+		input.close();
 	}
 
 	// function finds the perimeter of the square

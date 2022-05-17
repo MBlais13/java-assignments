@@ -1,4 +1,4 @@
-package review;
+package assignments.creating_for_loops;
 // Grade 11, Computer Science, Creating For Loops
 
 import java.util.Scanner;

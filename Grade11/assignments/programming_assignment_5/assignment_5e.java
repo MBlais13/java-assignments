@@ -1,4 +1,4 @@
-package assignments;
+package assignments.programming_assignment_5;
 // Grade 11, Computer Science, Assignment 5e
 
 import java.util.Scanner;
