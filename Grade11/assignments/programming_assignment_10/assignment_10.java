@@ -26,7 +26,7 @@ public class assignment_10 {
 		System.out.println("--------------------------\nThe average mark from those five is: " + average); // prints total average from marks
 	}
 
-	// prompts user to input marks *could have used a loop
+	// prompts user to input marks
 	static void menu() {
 		System.out.println("Please enter in the last five marks you had on a quiz:\n--------------------------");
 		System.out.print("Mark 1: ");
