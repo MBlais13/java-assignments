@@ -1,5 +1,4 @@
 // Grade 11, Computer Science, Assignment 12
-
 package assignments.programming_assignment_12;
 
 import java.util.Scanner;

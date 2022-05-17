@@ -1,6 +1,5 @@
 // Grade 11, Computer Science, Assignment Remixing For Loop and Array Programs #2
-
-package review.remixing_for_loop_and_array_programs;
+package assignments.cubes_squares_powers.remixing_for_loop_and_array_programs;
 
 import java.util.Scanner;
 
