@@ -1,3 +1,4 @@
+package assignments.programming_assignment_4;
 // Grade 11, Computer Science, Assignment 4
 
 import java.util.Scanner;

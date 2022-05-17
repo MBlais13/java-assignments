@@ -2,7 +2,7 @@
 
 // review needed!
 
-package programming_assignment_9;
+package assignments.programming_assignment_9;
 
 import java.util.Scanner;
 
@@ -83,6 +83,7 @@ public class assignment_9 {
 		} else if (answer6.equalsIgnoreCase("Y")) {
 			System.out.println("You sit still and when they lift you up you don't fall off and die instantly");
 			System.out.println("Congrats, you have won the game!");
+			input.close();
 		}
 		
 	}

@@ -1,6 +1,6 @@
 // Grade 11, Computer Science, Assignment Unit 1
 
-package unit_1_summative_multiple_choice_quiz;
+package assignments.unit_1_summative_multiple_choice_quiz;
 
 import java.util.Scanner;
 

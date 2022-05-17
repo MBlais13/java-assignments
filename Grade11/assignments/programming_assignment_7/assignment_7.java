@@ -1,6 +1,6 @@
 // Grade 11, Computer Science, Assignment 7
 
-package programming_assignment_7;
+package assignments.programming_assignment_7;
 
 import java.util.Scanner;
 import java.text.NumberFormat;

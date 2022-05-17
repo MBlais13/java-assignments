@@ -1,6 +1,6 @@
 // Grade 11, Computer Science, Assignment 9
 
-package programming_assignment_9;
+package assignments.programming_assignment_9;
 
 import java.util.Scanner;
 //import java.util.concurrent.TimeUnit; // unused - was used for a loading dot effect.
@@ -73,6 +73,7 @@ public class assignment_9e {
 			System.out.println("You open your eyes and realize you`re alive in a hospital in the year 2055.. The doctor tells you they somehow managed to upload your brain to a database and you now live the rest of your life in a mechanical robot body.");
 			// end of story
 			System.out.println("-\n~~The End.~~");
+			input.close();
 		}
 	}
 }
