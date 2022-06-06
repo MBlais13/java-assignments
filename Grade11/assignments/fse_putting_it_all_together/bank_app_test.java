@@ -1,8 +1,11 @@
-// Grade 11, Computer Science, Assignment 1
+// Grade 11, Computer Science, FSE Bank Application Assignment
+
+package assignments.fse_putting_it_all_together;
 
 import java.util.Scanner;
 import javax.swing.text.html.HTMLEditorKit.Parser;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -18,17 +21,17 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 class Accounts {
-	public static JSONObject jsonObject;
 	public static String File_Loc;
+	public static JSONObject jsonObject;
 	public static String customer_name;
 	public static String dob;
 	public static String account_no;
 	public static String type_of_account;
 	public static double balance; // Initial Balance
 	// String type_of_account;
-	int withdraw_amount;
-	int deposite_amount;
-	NumberFormat money = NumberFormat.getCurrencyInstance();
+	double withdraw_amount;
+	double deposite_amount;
+	public static NumberFormat moneyformatter = NumberFormat.getCurrencyInstance();
 
 	// Method to show Account Information
 	// String customer_name, String dob, String account_no, String type_of_account
@@ -49,23 +52,34 @@ class Accounts {
 			// }
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("An error occurred, please contact support.");
+			bank_app_test.support("json_error");
 		}
 	}
 
 	// Method for Update Balance
 	void UpdateBal() {
-		System.out.println("Updated Balance  = " + money.format(balance));
-		// jsonObject.remove("balance");
 
-		// String bal = String.valueOf(balance); // Turns balance(int) into a string
+		// double bal = balance;
+		// double bal = Double.parseDouble(balance); // changing string to double
+		// String balform = moneyformatter.format(bal);
 		// System.out.println(bal);
-		// jsonObject.put("balance", bal);
+		// System.out.println(balform);
+		String bal = String.valueOf(balance); // Turns balance(int) into a string
 
-		// FileWriter filewriter = new FileWriter(File_Loc);
-		// filewriter.write(jsonObject.toJSONString());
-		// filewriter.flush();
-		// filewriter.close();
+		jsonObject.remove("balance");
+		jsonObject.put("balance", bal);
+
+		System.out.println("Updated Balance  = " + bal);
+		// writes data to the provided json file
+		try (FileWriter filewriter = new FileWriter(File_Loc)) {
+			filewriter.write(jsonObject.toJSONString());
+			filewriter.flush();
+			filewriter.close();
+		} catch (IOException e) {
+			// catch block
+			e.printStackTrace();
+			bank_app_test.support("write_error");
+		}
 	}
 }
 
@@ -73,9 +87,9 @@ class Accounts {
 class Current_Account extends Accounts {
 
 	// Method for Withdraw in Current Account
-	void Withdraw(int wdraw_amount) {
+	void Withdraw(double withdraw_amount) {
 		if (balance > 0) {
-			withdraw_amount = wdraw_amount;
+			//withdraw_amount = withdraw_amount;
 			balance = balance - withdraw_amount;
 			min_bal_check();
 		} else {
@@ -84,8 +98,8 @@ class Current_Account extends Accounts {
 	}
 
 	// Method for deposit in Current Account
-	void Deposit(int depo_amount) {
-		deposite_amount = depo_amount;
+	void Deposit(double deposite_amount) {
+		// deposite_amount = deposite_amount;
 		balance = balance + deposite_amount;
 		UpdateBal();
 	}
@@ -113,16 +127,26 @@ class Saving_Account extends Accounts {
 
 	// Method to count Interest and Add Interest in Balance
 	void Compound_interest() {
-		Double InterestAmount = (balance * Compound_interest_rate) / 100;
-		System.out.println("Interest Amount = " + InterestAmount);
-		// System.out.println("Interest Amount = " +
-		// Math.round(InterestAmount*10000/10000));
-		balance = balance + InterestAmount;
+		double InterestAmount = (balance * Compound_interest_rate) / 100; // double
+		DecimalFormat formatterp = new DecimalFormat("#0.00");
+		String FormattedInterest = formatterp.format(InterestAmount);
+		System.out.println("Interest Amount : " + FormattedInterest); // prints interest amount
+
+		// String FormattedInterest = moneyformatter.format(InterestAmount); // changes
+		// int to string and money formats the amount
+		double InterestDouble = Double.parseDouble(FormattedInterest); // changing string to int
+
+		// NumberFormat formatter = NumberFormat.getCurrencyInstance();
+		// String moneyString = formatter.format(balance);
+		// System.out.println(moneyString);
+		balance = balance + InterestDouble;
 		UpdateBal();
+
+		bank_app_test.loading(10);
 	}
 
 	// Method for Withdraw in Saving Account
-	void Withdraw(int wdraw_amount) {
+	void Withdraw(double wdraw_amount) {
 		if (balance > 0) {
 			withdraw_amount = wdraw_amount;
 			balance = balance - withdraw_amount; // does not work
@@ -133,7 +157,7 @@ class Saving_Account extends Accounts {
 	}
 
 	// Method for deposit in Saving Account
-	void Deposit(int depo_amount) {
+	void Deposit(double depo_amount) {
 		deposite_amount = depo_amount;
 		balance = balance + deposite_amount;
 		UpdateBal();
@@ -145,22 +169,26 @@ public class bank_app_test extends Accounts {
 	public static void main(String[] args) throws Exception {
 
 		intro();
-
+		Scanner input = new Scanner(System.in);
 		Accounts obj1 = new Accounts();
 		Saving_Account obj2 = new Saving_Account();
 		Current_Account obj3 = new Current_Account();
-		Scanner fileinput = new Scanner(System.in);
 
-		// user input for json filepath
-		fileinput.useDelimiter("\n");
-		System.out.print("Enter input file path and name:");
-		File_Loc = fileinput.nextLine();
-		System.out.println("You entered: " + File_Loc);
-
-		// gets vars from json file
-		JSONParser parser = new JSONParser();
-
+		// if any other input besides filepath is detected it will throw.
 		try {
+			// user input for json filepath
+			input.useDelimiter("\n");
+			System.out.print("Enter input file path and name:");
+			File_Loc = input.nextLine();
+		} catch (Exception e) {
+			support("filepath_error");
+		}
+
+		System.out.println("You entered: " + File_Loc);
+		try { // gets vars from json file
+
+			JSONParser parser = new JSONParser();
+
 			// reading json file from 'File_Loc'
 			Object file = parser.parse(new FileReader(File_Loc));
 			jsonObject = (JSONObject) file;
@@ -171,97 +199,104 @@ public class bank_app_test extends Accounts {
 			String balance_string = (String) jsonObject.get("balance");
 			account_no = (String) jsonObject.get("account_no");
 			type_of_account = (String) jsonObject.get("type_of_account");
-			balance = Integer.parseInt(balance_string); // changing string to int
-
-			// JSONObject js = new JSONObject(); // Your jsonobject here, this is just a
-			// sample
+			balance = Double.parseDouble(balance_string); // changing string to double
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			support("filepath");
+			support("filepath_error");
 		}
-
-		Scanner input = new Scanner(System.in);
 
 		// String File_Loc = input.nextLine(); // File location.
 		// System.out.println(File_Loc);
 
 		// clear();
 		System.out.println("program start");
-		int withdraw_amount;
-		int deposite_amount;
-
-		// // -- OLD -- asks for the account type you want
-		// System.out.println("====================Account Type====================");
-		// System.out.println("1. Savings Account ");
-		// System.out.println("2. Current Account ");
-		// System.out.println("Enter Your Account type :");
-		// int Acc_Type = input.nextInt(); // It will take input from user for Account
-		// type.
+		double withdraw_amount;
+		double deposite_amount;
 
 		bankingoptions(); // prints the banking options
 		int flag = 0; // flag for exit
 
 		do {
-			System.out.println("Enter Your Input :");
-			int InputFromUser = input.nextInt();
+			System.out.print("Enter Your Input :");
+			Scanner inputt = new Scanner(System.in);
+			int InputFromUser;
+			InputFromUser = inputt.nextInt();
 			bankingoptions(); // prints the banking options
-
 			switch (InputFromUser) {
 				case 1: // for show Account Info
-					// customer_name, dob, account_no, type_of_account
 					obj1.Show_Account_Holder_Info();
 					break;
-
-				case 2: // for Deposite
-					if (type_of_account == "savings") // Saving Deposit
-					{
-						System.out.println("Enter an amount you want to deposite = ");
-						deposite_amount = input.nextInt();
-						obj2.Deposit(deposite_amount);
-						break;
-					} else // Current Deposite
-					{
-						System.out.println("Enter an amount you want to deposite = ");
-						deposite_amount = input.nextInt();
-						obj3.Deposit(deposite_amount);
-						break;
-					}
-
+				case 2: // for Deposit
+					System.out.println("Enter an amount you want to deposite = ");
+					deposite_amount = inputt.nextDouble();
+					obj2.Deposit(deposite_amount);
+					break;
 				case 3: // for Withdraw
-					if (type_of_account == "savings") // Saving Withdraw
-					{
-						System.out.println("Enter an amount you want to withdraw = ");
-						withdraw_amount = input.nextInt();
-						obj2.Withdraw(withdraw_amount);
-						break;
-					} else // current withdraw
-					{
-						System.out.println("Enter an amount you want to withdraw = ");
-						withdraw_amount = input.nextInt();
-						obj3.Withdraw(withdraw_amount);
-						break;
-					}
-				case 4: // update balance
-					if (type_of_account == "savings") // update balance for saving
-					{
-						obj2.UpdateBal();
-						break;
-					} else // update balance for current
-					{
-						obj3.UpdateBal();
-						break;
-					}
-				case 5: // Interest for Saving Account only
+					System.out.println("Enter an amount you want to withdraw = ");
+					withdraw_amount = inputt.nextDouble();
+					obj2.Withdraw(withdraw_amount);
+					break;
+				case 4: // show balance
+					obj2.UpdateBal();
+					break;
+
+				case 5:// Interest for Saving Account only
 					obj2.Compound_interest();
 					break;
+				// if (type_of_account == "savings") // update balance for saving
+				// {
+				// System.out.println("----------------");
+				// obj2.Compound_interest();
+				// System.out.println("----------------");
+				// //break;
+				// } else if (type_of_account == "current"){
+				// System.out.println("You need a savings account to use interest.");
+				// break;
+				// }
+
 				case 6:
-					System.out.println("Bye Bye . Thank you");
-					input.close();
+					clear();
+					String textart = "Thank you for banking with blais financial";
+					// String textart = """
+					// ********** ** ** **** ** ** **
+					// /////**/// /** /** ** ** /**/ /** /** // *****
+					// /** /** ****** ******* /** ** //** ** ****** ** ** ****** ****** ****** /**
+					// ****** ******* /** ** ** ******* **///**
+					// /** /****** //////** //**///**/** ** //*** **////**/** /** ///**/
+					// **////**//**//* /****** //////** //**///**/** ** /**//**///**/** /**
+					// /** /**///** ******* /** /**/**** /** /** /**/** /** /** /** /** /** /
+					// /**///** ******* /** /**/**** /** /** /**//******
+					// /** /** /** **////** /** /**/**/** ** /** /**/** /** /** /** /** /** /** /**
+					// **////** /** /**/**/** /** /** /** /////**
+					// /** /** /**//******** *** /**/**//** ** //****** //****** /** //****** /***
+					// /****** //******** *** /**/**//**/** *** /** *****
+					// // // // //////// /// // // // // ////// ////// // ////// /// ///// ////////
+					// /// // // // // /// // /////
+
+					// ** ** ** ****** ** ** ******** ** ** **
+					// // /** /** /*////** /** // /**///// // // /**
+					// *** ** ** ******/** /* /** /** ****** ** ****** /** ** ******* ****** *******
+					// ***** ** ****** /**
+					// //** * /**/**///**/ /****** /****** /** //////** /** **//// /*******
+					// /**//**///** //////** //**///** **///**/** //////** /**
+					// /** ***/**/** /** /**///** /*//// ** /** ******* /**//***** /**//// /** /**
+					// /** ******* /** /**/** // /** ******* /**
+					// /****/****/** /** /** /** /* /** /** **////** /** /////** /** /** /** /**
+					// **////** /** /**/** **/** **////** /**
+					// ***/ ///**/** //** /** /** /******* ***//********/** ****** /** /** ***
+					// /**//******** *** /**//***** /**//******** ***
+					// /// /// // // // // /////// /// //////// // ////// // // /// // //////// ///
+					// // ///// // //////// ///
+					// """;
+					for (int i = 0; i < textart.length(); i++) {
+						System.out.print(textart.charAt(i));
+					}
+					inputt.close();
 					flag = 1;
 					break;
 				default:
-					System.out.println("out the if You havent give any Input");
+					System.out.println("You haven't given a valid input");
 					break;
 			}
 		} while (flag == 0);
@@ -273,8 +308,31 @@ public class bank_app_test extends Accounts {
 		System.out.flush();
 	}
 
+	static void delay(int ms) { // delays certain actions
+		try {
+			Thread.sleep(ms); // thread.sleep is not recommended.
+		} catch (InterruptedException e) {
+			System.err.format("IOException: %s%n", e);
+		}
+	}
+
+	// makes loading animation
+	static void loading(int ms) {
+		String progress_dots = ".......................................................";
+		int stringLength = progress_dots.length();
+		// System.out.print(progress_dots);
+
+		for (int i = stringLength; i > 0; i -= 1) {// countdown timer to return to
+			System.out.print(".");
+			delay(ms);
+		}
+		System.out.println();//creates new line after completed
+	}
+
+	// blais financial logo
 	static void intro() {
 		// clear();
+		// ASCII font used : 3-D, https://patorjk.com/software/taag/#p=display&f=3-D&t=
 		String textart = """
 				******    **           **               ******** **                                     **            **
 				/*////**  /**          //               /**///// //                                     //            /**
@@ -288,21 +346,30 @@ public class bank_app_test extends Accounts {
 		for (int i = 0; i < textart.length(); i++) {
 			System.out.print(textart.charAt(i));
 		}
-
-		// clear();
 	}
 
+	// if program throws and error it will display error details
 	static void support(String errorcode) {
-		System.out.println("It seems like an error occurred :(\n" + "Error code: " + errorcode
-				+ "\nPlease contact support @contact.mblais@gmail.com");
+		if (errorcode == "filepath_error") {
+			System.out.println("It seems like an error occurred :(\n"
+					+ "filepath_error : Please check the filepath and try again");
+		} else if (errorcode == "json_error") {
+			System.out.println(
+					"It seems like an error occurred :(\n" + "json_error : Please check the json file and try again");
+		} else if (errorcode == "write_error") {
+			System.out.println("It seems like an error occurred :(\n"
+					+ "write_error : Please check the json file and filepath, then try again");
+		}
+		System.out.println("If issue persists please contact support@ contact.mblais@gmail.com");
 	}
 
+	// main banking menu
 	static void bankingoptions() {
 		clear();
 		System.out.println("====================BANKING OPTION====================");
 		System.out.println("1.  Get Your Account Details ");
-		System.out.println("2.  Deposit Money ");
-		System.out.println("3.  Withdraw Money ");
+		System.out.println("2.  Deposit money ");
+		System.out.println("3.  Withdraw money ");
 		System.out.println("4.  Show Balance ");
 		System.out.println("5.  Compute Interest "); // only for savings account
 		System.out.println("6.  Exit ");
