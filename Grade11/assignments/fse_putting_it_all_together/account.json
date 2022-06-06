@@ -1,7 +1,8 @@
 {
-    "name": "Michael Blais",
-    "dob": "2000-01-01",
-    "balance": 0,
-    "account_no": 0,
-    "type_of_account": "Saving Account"
-  }
+  "role": "user",
+  "balance": "506.87",
+  "dob": "2000-01-01",
+  "customer_name": "Michael Blais",
+  "type_of_account": "savings",
+  "account_no": "1001"
+}
