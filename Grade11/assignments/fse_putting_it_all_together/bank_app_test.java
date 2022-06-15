@@ -13,6 +13,7 @@ import org.json.simple.parser.*;
 import java.io.*;
 import java.net.URL;
 import java.net.*;
+
 // write to json file
 import java.io.File;
 import java.io.FileWriter;
@@ -21,6 +22,14 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 class Accounts {
+
+	// custom vars
+	double Compound_interest_rate = 1.12; // Interest Rate
+	double min_balance = 10; // Minimum account balance
+	double service_charge = 0; // Service charge that gets added to each withdrawal
+	public static int debug_mode = 0; // 1 = true
+
+	// static vars
 	public static String File_Loc;
 	public static JSONObject jsonObject;
 	public static String customer_name;
@@ -63,9 +72,7 @@ class Accounts {
 		// double bal = Double.parseDouble(balance); // changing string to double
 		// String balform = moneyformatter.format(bal);
 		// System.out.println(bal);
-		// System.out.println(balform);
 		String bal = String.valueOf(balance); // Turns balance(int) into a string
-
 		jsonObject.remove("balance");
 		jsonObject.put("balance", bal);
 
@@ -88,42 +95,43 @@ class Current_Account extends Accounts {
 
 	// Method for Withdraw in Current Account
 	void Withdraw(double withdraw_amount) {
-		if (balance > 0) {
-			//withdraw_amount = withdraw_amount;
-			balance = balance - withdraw_amount;
-			min_bal_check();
+		if (withdraw_amount > 0) {
+			if ((withdraw_amount - balance) < 0) {
+				balance = balance - withdraw_amount;
+				balance = balance - service_charge;
+				min_bal_check();
+			} else {
+				System.out.println("You do not have any balance. you can not withdraw.");
+			}
 		} else {
-			System.out.println("You do not have any balance. you can not withdraw.");
+			System.out.println("Invalid input");
 		}
 	}
 
 	// Method for deposit in Current Account
 	void Deposit(double deposite_amount) {
-		// deposite_amount = deposite_amount;
-		balance = balance + deposite_amount;
-		UpdateBal();
+		if (deposite_amount > 0) {
+			// deposite_amount = deposite_amount;
+			balance = balance + deposite_amount;
+			UpdateBal();
+		} else {
+			System.out.println("Seems like you gave an invalid input");
+		}
 	}
-
-	double min_balance = 100;
-	double service_charge = 10;
 
 	// Method to check minimum balance
 	void min_bal_check() {
 		if (balance < min_balance) {
 			System.out.println("Your Account balance is less then Minimun.");
-			balance = balance - service_charge;
 			UpdateBal();
 		} else {
 			UpdateBal();
 		}
-
 	}
-
 }
 
 // Class for Saving Account
 class Saving_Account extends Accounts {
-	double Compound_interest_rate = 1.12; // Interest Rate
 
 	// Method to count Interest and Add Interest in Balance
 	void Compound_interest() {
@@ -145,27 +153,19 @@ class Saving_Account extends Accounts {
 		bank_app_test.loading(10);
 	}
 
-	// Method for Withdraw in Saving Account
-	void Withdraw(double wdraw_amount) {
-		if (balance > 0) {
-			withdraw_amount = wdraw_amount;
-			balance = balance - withdraw_amount; // does not work
-			UpdateBal();
-		} else {
-			System.out.println("You do not have any balance. You can not withdraw.");
-		}
-	}
-
-	// Method for deposit in Saving Account
-	void Deposit(double depo_amount) {
-		deposite_amount = depo_amount;
-		balance = balance + deposite_amount;
-		UpdateBal();
-	}
 }
 
 // Main Class
 public class bank_app_test extends Accounts {
+
+	// public static String getFileExtension(String fullName) {
+	// 	//checkNotNull(fullName);
+	// 	String fileName = new File(fullName).getName();
+	// 	int dotIndex = fileName.lastIndexOf('.');
+	// 	System.out.println("loc:: "+dotIndex);
+	// 	return (dotIndex == -1) ? "" : fileName.substring(dotIndex + 1);
+	// }
+
 	public static void main(String[] args) throws Exception {
 
 		intro();
@@ -180,8 +180,12 @@ public class bank_app_test extends Accounts {
 			input.useDelimiter("\n");
 			System.out.print("Enter input file path and name:");
 			File_Loc = input.nextLine();
+
+			///getFileExtension(File_Loc);
+
 		} catch (Exception e) {
 			support("filepath_error");
+			return;
 		}
 
 		System.out.println("You entered: " + File_Loc);
@@ -204,13 +208,14 @@ public class bank_app_test extends Accounts {
 		} catch (Exception e) {
 			e.printStackTrace();
 			support("filepath_error");
+			return;
 		}
 
 		// String File_Loc = input.nextLine(); // File location.
 		// System.out.println(File_Loc);
 
-		// clear();
-		System.out.println("program start");
+		clear();
+		//System.out.println("program start");
 		double withdraw_amount;
 		double deposite_amount;
 
@@ -230,12 +235,12 @@ public class bank_app_test extends Accounts {
 				case 2: // for Deposit
 					System.out.println("Enter an amount you want to deposite = ");
 					deposite_amount = inputt.nextDouble();
-					obj2.Deposit(deposite_amount);
+					obj3.Deposit(deposite_amount);
 					break;
 				case 3: // for Withdraw
 					System.out.println("Enter an amount you want to withdraw = ");
 					withdraw_amount = inputt.nextDouble();
-					obj2.Withdraw(withdraw_amount);
+					obj3.Withdraw(withdraw_amount);
 					break;
 				case 4: // show balance
 					obj2.UpdateBal();
@@ -257,7 +262,7 @@ public class bank_app_test extends Accounts {
 
 				case 6:
 					clear();
-					String textart = "Thank you for banking with blais financial";
+					String textart = "Thank you for banking with Blais financial.\n";
 					// String textart = """
 					// ********** ** ** **** ** ** **
 					// /////**/// /** /** ** ** /**/ /** /** // *****
@@ -326,12 +331,14 @@ public class bank_app_test extends Accounts {
 			System.out.print(".");
 			delay(ms);
 		}
-		System.out.println();//creates new line after completed
+		System.out.println();// creates new line after completed
 	}
 
 	// blais financial logo
 	static void intro() {
-		// clear();
+		if (debug_mode == 0) {
+			clear();
+		}
 		// ASCII font used : 3-D, https://patorjk.com/software/taag/#p=display&f=3-D&t=
 		String textart = """
 				******    **           **               ******** **                                     **            **
@@ -350,6 +357,7 @@ public class bank_app_test extends Accounts {
 
 	// if program throws and error it will display error details
 	static void support(String errorcode) {
+		delay(5);
 		if (errorcode == "filepath_error") {
 			System.out.println("It seems like an error occurred :(\n"
 					+ "filepath_error : Please check the filepath and try again");
